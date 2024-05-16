@@ -28,7 +28,6 @@ use Illuminate\Support\Carbon;
  * @method static Builder|FileManager whereUpdatedAt($value)
  * @property string|null $name
  * @method static Builder|FileManager whereName($value)
- * @mixin Eloquent
  */
 class FileManager extends Model
 {
@@ -64,7 +63,8 @@ class FileManager extends Model
         try {
             if ($fileData['file']) {
                 $filePath = str_replace('/', '\\', $fileData['storage_path']);
-                if (file_exists(public_path($filePath))) {
+
+                if (file_exists(public_path($filePath)) && $fileData['storage_path']) {
                     unlink(public_path($filePath));
                 }
                 $this->storeImage($fileData);
@@ -85,4 +85,5 @@ class FileManager extends Model
         $this->file_link = '/storage/' . $filePath;
         $this->save();
     }
+
 }

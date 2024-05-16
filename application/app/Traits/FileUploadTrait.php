@@ -12,7 +12,7 @@ trait FileUploadTrait
         $fileManager->upload($fileDetails);
     }
 
-    public function FileUpdate($newFile, $originType, $originId, $folder): void
+    public function FileUpdate($newFile, $originType, $originId, $folder)
     {
         $fileManager = FileManager::where('origin_type', $originType)->where('origin_id', $originId)->get()->first();
         if (!$fileManager) {
@@ -20,6 +20,6 @@ trait FileUploadTrait
         }
         $fileDetails = $fileManager->fileDataMaping($newFile, $originType, $originId, $folder);
         $fileDetails['storage_path'] = $fileManager->file_link;
-        $fileManager->updateFile($fileDetails);
+       return $fileManager->updateFile($fileDetails);
     }
 }

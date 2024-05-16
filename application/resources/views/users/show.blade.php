@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>User Details</title>
     <style>
@@ -18,20 +18,20 @@
             max-width: 500px;
             padding: 20px;
             border: 1px solid #ddd;
-            border-radius: 5px;  /* Add rounded corners (optional) */
+            border-radius: 5px; /* Add rounded corners (optional) */
         }
 
         .user-details img {
-            display: block;  /* Display photo as a block element */
-            margin: 0 auto 20px auto;  /* Center photo horizontally and add bottom margin */
-            max-width: 300px;  /* Increase photo width */
-            max-height: 300px;  /* Increase photo height */
+            display: block; /* Display photo as a block element */
+            margin: 0 auto 20px auto; /* Center photo horizontally and add bottom margin */
+            max-width: 300px; /* Increase photo width */
+            max-height: 300px; /* Increase photo height */
             /* Removed border-radius: 50%; to remove rounded corners */
         }
 
         .user-details ul {
-            margin: 0;  /* Remove default list margins */
-            padding: 0;  /* Remove default list padding */
+            margin: 0; /* Remove default list margins */
+            padding: 0; /* Remove default list padding */
         }
 
         .user-details li {
@@ -68,11 +68,11 @@
 </head>
 <body>
 
-<h1>User Details</h1>
+<h1>User Details of {{$user->full_name}}</h1>
 
 <div class="user-details">
     @if (@$user->filemanager)
-        <img src="{{ url($user->filemanager->file_link) }}" alt="{{ $user->firstname }} profile photo">
+        <img src="{{ url($user->avatar) }}" alt="{{ $user->firstname }} profile photo">
     @else
         <p>No photo available</p>
     @endif
@@ -85,7 +85,7 @@
             <strong>First Name:</strong> {{ $user->firstname }}
         </li>
         <li>
-            <strong>Middle Name:</strong> {{ $user->middlename }}
+            <strong>Middle Name:</strong> {{ $user->middle_initial }}
         </li>
         <li>
             <strong>Last Name:</strong> {{ $user->lastname }}

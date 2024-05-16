@@ -52,8 +52,37 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function filemanager(): MorphOne
+
+    public function fileManager(): MorphOne
     {
-        return $this->morphOne(FileManager::class,'origin');
+        return $this->morphOne(FileManager::class, 'origin');
+    }
+
+    public function getAvatarAttribute(): string
+    {
+        if ($this->filemanager) {
+
+            return url($this->filemanager->file_link);
+        }
+
+        return "";
+    }
+
+    public function getFullNameAttribute(): string
+    {
+        $fullName = trim($this->firstname);
+
+        if (!empty($this->middlename)) {
+            $fullName .= ' ' . trim($this->middlename);
+        }
+
+        $fullName .= ' ' . trim($this->prefixname) . ' ' . trim($this->lastname);
+
+        return $fullName;
+    }
+
+    public function getMiddleInitialAttribute(): string
+    {
+        return trim($this->middlename);
     }
 }

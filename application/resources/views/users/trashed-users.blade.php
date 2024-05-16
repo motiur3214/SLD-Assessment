@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Users List</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
@@ -28,6 +28,15 @@
 
         .new-user-button:hover {
             background-color: #0062cc; /* Blue Hover */
+        }
+
+        /* Action buttons styling */
+        .action-buttons {
+            display: flex; /* Make buttons appear side-by-side */
+        }
+
+        .action-buttons button {
+            margin-right: 5px; /* Add some spacing between buttons */
         }
     </style>
 </head>
@@ -62,19 +71,23 @@
                 <td>{{ $user->lastname }}</td>
                 <td>{{ $user->email }}</td>
                 @if (@$user->filemanager)
-                    <td><img src="{{url($user->filemanager->file_link)}}" alt="{{ $user->firstname }} profile photo"
+                    <td><img src="{{url($user->avatar)}}" alt="{{ $user->firstname }} profile photo"
                              width="50" height="50"></td>
                 @else
                     <td>No photo available</td>
                 @endif
-               <td><a href="{{ route('users.restore', $user->id) }}" class="btn btn-success">Restore</a>
-                   <form action="{{ route('users.delete', $user->id) }}" method="POST" style="display: inline-block">
-                       @csrf
-                       @method('DELETE')
-                       <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this user? (This action is reversible)');">Delete</button>
-                   </form>
-               </td>
-
+                <td>
+                    <div class="action-buttons">
+                        <form action="{{ route('users.restore', $user->id) }}" method="POST">
+                            @csrf  @method('PATCH')  <button type="submit" class="btn btn-success">Restore</button>
+                        </form>
+                        <form action="{{ route('users.delete', $user->id) }}" method="POST" style="display: inline-block">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this user? (This action is reversible)');">Delete</button>
+                        </form>
+                    </div>
+                </td>
             </tr>
         @endforeach
         </tbody>
