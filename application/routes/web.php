@@ -12,7 +12,6 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-require __DIR__ . '/auth.php';
 Route::middleware('auth')->group(function () {
     Route::resource('/users', UserController::class);
     Route::get('/trashed-users-list', [UserController::class, 'trashedUsers'])->name('users.trashed');
@@ -23,4 +22,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
+require __DIR__.'/auth.php';

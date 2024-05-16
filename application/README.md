@@ -3,4 +3,6 @@ laravel 11
 cd application
 composer install
 npm install
-ph
+php artisan storage:link
+php artisan serve
+npm run dev
