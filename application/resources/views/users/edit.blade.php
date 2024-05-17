@@ -13,7 +13,7 @@
     </style>
 </head>
 <body>
-
+@include('layouts.navigation')
 <h1 class="text-center mb-4">Edit User</h1>
 
 @if ($errors->any())

@@ -50,6 +50,7 @@
     </style>
 </head>
 <body>
+@include('layouts.navigation')
 @if (session('success'))
     <div class="alert alert-success">
         {{ session('success') }}

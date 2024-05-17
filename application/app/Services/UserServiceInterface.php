@@ -8,10 +8,10 @@ use App\Models\User;
 
 interface UserServiceInterface
 {
-    public function store(CreateUserRequest $data): User;
+    public function store(array $data): User;
     public function update(array $data, int $userId): User;
 
-    public function storeRule(CreateUserRequest $request): CreateUserRequest;
+    public function storeRule(CreateUserRequest $request): array;
 
     public function updateRule(UpdateUserRequest $request): array;
 

@@ -58,6 +58,7 @@ class CreateUserRequest extends FormRequest
     public function messages()
     {
         return [
+            'prefixname.in' => 'The prefix must be one of the following: Mr, Ms, or Mrs.',
             'photo.image' => 'The photo must be an image file.',
             'photo.mimes' => 'The photo must be a JPEG, PNG, JPG, or GIF file.',
             'photo.max' => 'The photo must be no larger than 2 megabytes.',
