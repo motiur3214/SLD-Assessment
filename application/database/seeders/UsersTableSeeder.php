@@ -18,12 +18,12 @@ class UsersTableSeeder extends Seeder
         $users = [
             [
                 'prefixname' => 'Mr.',
-                'firstname' => 'John',
+                'firstname' => 'admin',
                 'middlename' => 'Doe',
-                'lastname' => 'Smith',
+                'lastname' => 'admin',
                 'suffixname' => 'Jr.',
-                'username' => 'johndoe',
-                'email' => 'johndoe@example.com',
+                'username' => 'admin',
+                'email' => 'admin@admin.com',
                 'photo' => null,
                 'type' => 'admin',
                 'email_verified_at' => now(),

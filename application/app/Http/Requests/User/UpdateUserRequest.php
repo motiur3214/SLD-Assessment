@@ -15,7 +15,7 @@ class UpdateUserRequest extends FormRequest
      */
     public function authorize()
     {
-        return true; // Assuming authorization is handled elsewhere (e.g., middleware)
+        return true;
     }
 
     /**
@@ -23,8 +23,11 @@ class UpdateUserRequest extends FormRequest
      *
      * @return array
      */
+
     public function rules()
     {
+
+        $userId = $this->route('user');
         return [
             'prefixname' => 'nullable|string|max:255',
             'firstname' => 'required|string|max:255',
@@ -35,14 +38,14 @@ class UpdateUserRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                Rule::unique(User::class)->ignore($this->user->id),
+                Rule::unique(User::class)->ignore($userId),
             ],
             'email' => [
                 'required',
                 'string',
                 'email',
                 'max:255',
-                Rule::unique(User::class)->ignore($this->user->id),
+                Rule::unique(User::class)->ignore($userId),
             ],
             'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Maximum size 2MB (adjust as needed)
             'type' => 'nullable|string|max:255',
@@ -61,5 +64,10 @@ class UpdateUserRequest extends FormRequest
             'photo.mimes' => 'The photo must be a JPEG, PNG, JPG, or GIF file.',
             'photo.max' => 'The photo must be no larger than 2 megabytes.',
         ];
+    }
+
+    public function validateData($data): array
+    {
+        return $this->validate($this->rules(), $data);
     }
 }

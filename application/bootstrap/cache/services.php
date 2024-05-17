@@ -32,6 +32,7 @@
     28 => 'Spatie\\LaravelIgnition\\IgnitionServiceProvider',
     29 => 'App\\Providers\\AppServiceProvider',
     30 => 'App\\Providers\\RouteMacroServiceProvider',
+    31 => 'App\\Providers\\UserServiceProvider',
   ),
   'eager' => 
   array (
@@ -51,6 +52,7 @@
     13 => 'Spatie\\LaravelIgnition\\IgnitionServiceProvider',
     14 => 'App\\Providers\\AppServiceProvider',
     15 => 'App\\Providers\\RouteMacroServiceProvider',
+    16 => 'App\\Providers\\UserServiceProvider',
   ),
   'deferred' => 
   array (
