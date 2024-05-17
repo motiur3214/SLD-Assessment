@@ -20,7 +20,7 @@ class UserService implements UserServiceInterface
 
     public function list(int $perPage = 10): LengthAwarePaginator
     {
-        return $this->user->where('id', '!=', Auth()->id())->paginate($perPage);
+        return $this->user->with('details')->where('id', '!=', Auth()->id())->paginate($perPage);
     }
 
     public function listTrashed(int $perPage = 10): LengthAwarePaginator
@@ -56,14 +56,12 @@ class UserService implements UserServiceInterface
         return $this->user->findOrFail($userId);
     }
 
-    public function storeRule(CreateUserRequest $request): CreateUserRequest
+    public function storeRule(CreateUserRequest $request): array
     {
-        $data = $request->all();
-        return $request->validateData($data);
-
+        return $request->validated();
     }
 
-    public function store(CreateUserRequest $data): User
+    public function store(array $data): User
     {
         $photo = $data['photo'];
         unset($data['photo']);
@@ -102,5 +100,31 @@ class UserService implements UserServiceInterface
     public function hash(string $password): string
     {
         return Hash::make($password);
+    }
+
+    public function saveDetails(User $user)
+    {
+        $user->details()->updateOrCreate(
+            ['key' => $user->full_name], // Assuming 'key' is unique for each user
+            [
+                'value' => $user->middle_initial ?? null,
+                'icon' => $user->avatar ?? null,
+                'status' => $user->deleted_at ? 'deactivated' : 'active',
+                'type' => $this->getGender($user->prefixname) ?? null,
+                'user_id' => $user->id,
+            ]
+        );
+    }
+
+    private function getGender(string $prefixName)
+    {
+        if (empty($prefixName)) {
+            return null;
+        }
+        $gender = 'Female';
+        if ($prefixName == 'Mr') {
+            $gender = 'Male';
+        }
+        return $gender;
     }
 }

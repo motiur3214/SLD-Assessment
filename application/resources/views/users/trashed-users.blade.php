@@ -9,27 +9,6 @@
             font-family: sans-serif;
         }
 
-        /* New User Button Styling */
-        .new-user-button {
-            background-color: #007bff; /* Blue */
-            border: none;
-            color: white;
-            padding: 8px 16px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            position: absolute; /* Removed fixed positioning */
-            top: 10px; /* Adjust top position as needed */
-            right: 10px; /* Positions the button at right side */
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        .new-user-button:hover {
-            background-color: #0062cc; /* Blue Hover */
-        }
-
         /* Action buttons styling */
         .action-buttons {
             display: flex; /* Make buttons appear side-by-side */
@@ -41,6 +20,7 @@
     </style>
 </head>
 <body>
+@include('layouts.navigation')
 @if (session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
@@ -48,10 +28,6 @@
 @endif
 
 <div class="container">
-    <div class="d-flex justify-content-end mb-2"><a href="{{ route('users.create') }}" class="new-user-button">New
-            User</a>
-    </div>
-
     <h1>Users List</h1>
 
     <table class="table table-bordered table-hover">

@@ -3,7 +3,9 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Events\UserSaved;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -53,15 +55,31 @@ class User extends Authenticatable
         ];
     }
 
+    /**
+     * The "booted" method of the model.
+     *
+     * @return void
+     */
+    protected static function booted()
+    {
+        static::saved(function ($user) {
+            event(new UserSaved($user));
+        });
+    }
+
     public function fileManager(): MorphOne
     {
         return $this->morphOne(FileManager::class, 'origin');
     }
 
+    public function details(): HasMany
+    {
+        return $this->hasMany(Detail::class);
+    }
+
     public function getAvatarAttribute(): string
     {
         if ($this->filemanager) {
-
             return url($this->filemanager->file_link);
         }
 
@@ -83,6 +101,6 @@ class User extends Authenticatable
 
     public function getMiddleInitialAttribute(): string
     {
-        return trim($this->middlename);
+        return !empty($this->middlename) ? substr($this->middlename, 0, 1) . '.' : '';
     }
 }

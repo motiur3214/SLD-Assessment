@@ -3,50 +3,62 @@
         @csrf
 
         <!-- Name -->
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
-            <x-input-error :messages="$errors->get('name')" class="mt-2" />
+        <div class="form-group mb-3">
+            <label for="prefixname">Prefix Name:</label>
+            <input type="text" name="prefixname" id="prefixname" class="form-control" value="{{ old('prefixname') }}">
         </div>
 
-        <!-- Email Address -->
-        <div class="mt-4">
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+        <div class="form-group mb-3">
+            <label for="firstname">First Name:</label>
+            <input type="text" name="firstname" id="firstname" class="form-control" required value="{{ old('firstname') }}">
         </div>
 
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+        <div class="form-group mb-3">
+            <label for="middlename">Middle Name:</label>
+            <input type="text" name="middlename" id="middlename" class="form-control" value="{{ old('middlename') }}">
         </div>
 
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                            type="password"
-                            name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        <div class="form-group mb-3">
+            <label for="lastname">Last Name:</label>
+            <input type="text" name="lastname" id="lastname" class="form-control" required value="{{ old('lastname') }}">
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('login') }}">
-                {{ __('Already registered?') }}
-            </a>
-
-            <x-primary-button class="ms-4">
-                {{ __('Register') }}
-            </x-primary-button>
+        <div class="form-group mb-3">
+            <label for="suffixname">Suffix Name:</label>
+            <input type="text" name="suffixname" id="suffixname" class="form-control" value="{{ old('suffixname') }}">
         </div>
+
+        <div class="form-group mb-3">
+            <label for="username">Username:</label>
+            <input type="text" name="username" id="username" class="form-control" required value="{{ old('username') }}">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" class="form-control" required value="{{ old('email') }}">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="photo">Photo:</label>
+            <input type="file" name="photo" id="photo" class="form-control">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="type">Type:</label>
+            <input type="text" name="type" id="type" class="form-control" value="{{ old('type') }}">
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" class="form-control" required>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="password_confirmation">Confirm Password:</label>
+            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create User</button>
+
     </form>
 </x-guest-layout>

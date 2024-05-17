@@ -48,6 +48,7 @@
 
         .edit-link {
             background-color: #4CAF50; /* Green */
+            margin-top: 70px;
             color: white;
             padding: 8px 16px;
             text-align: center;
@@ -62,12 +63,13 @@
         }
 
         .edit-link:hover {
+
             background-color: #45A049; /* Green Hover */
         }
     </style>
 </head>
 <body>
-
+@include('layouts.navigation')
 <h1>User Details of {{$user->full_name}}</h1>
 
 <div class="user-details">
